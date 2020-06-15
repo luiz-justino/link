@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
@@ -47,14 +48,36 @@ class LoginController extends Controller
 
     protected function login(Request $request) {
 
+
+        $rules = [
+            'login' => 'required_if:certificate,',
+            'password' => 'required_if:certificate,',
+        ];
+
+        $messages = [
+            'login.required' => 'O campo login deve ser preenchido.',
+            'login.min' => 'O campo login não atende aos requisitos mínimos.',
+            'login.required_if' => 'O campo login deve ser preenchido caso não faça acesso com certificado digital.',
+            'password.required' => 'O campo senha deve ser preenchido.',
+            'password.required_if' => 'O campo senha deve ser preenchido caso não faça acesso com certificado digital.',
+        ]; 
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()->route('login')
+                ->withInput($request->only($request->login, 'remember'))
+                ->withErrors($validator->errors());
+        }
+
         $errors = '';
 
-
-        if($request->certificate) {
-            //dd($_FILES['certificate']);
+        if($request->certificate) { 
             if (!$cert_store = file_get_contents($_FILES['certificate']['tmp_name'])) {
-                echo "Error: Unable to read the cert file\n";
-                exit;
+                $errors = ['certificate' => 'Não foi possível efetuar a leitura do certificado informado.'];
+            return redirect()->route('login')
+                ->withInput($request->only($request->login, 'remember'))
+                ->withErrors($errors);
             }
 
             if (openssl_pkcs12_read($cert_store, $cert_info, "1234")) {
@@ -81,6 +104,7 @@ class LoginController extends Controller
 
                 default:
                     $acces_permited = false;
+                    $request->session()->flush();
                     $errors = ['login' => 'Acesso não autorizado.'];
                     break;
             }
@@ -103,8 +127,12 @@ class LoginController extends Controller
 
         }
 
-
-
-
     }
+
+    protected function logout(Request $request) {
+
+            $request->session()->flush();
+            return redirect()->route('login')
+                ->withInput($request->only($request->login, 'remember'));        
+    }    
 }

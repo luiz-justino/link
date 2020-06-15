@@ -15,10 +15,7 @@ use Illuminate\Http\Request;
 */
 
 Auth::routes();
-
+Route::post('/loginWithCertificate', 'Auth\LoginController@loginWithCertificate')->middleware('auth');
 Route::get('/home', 'HomeController@index')->middleware('has_permission')->name('home');
 Route::get('/', 'HomeController@indexPage')->middleware('has_permission')->name('index');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

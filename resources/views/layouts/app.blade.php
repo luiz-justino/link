@@ -10,7 +10,8 @@
     <title>{{ config('app.name', 'Link') }}</title>
 
     <!-- Scripts -->
-     <script src="{{ asset('base/general.js') }}"></script>
+     <script src="{{ asset('js/base/general.js') }}"></script>
+     <script src="{{ asset('js/jquery-1.11.3.min.js') }}"></script>
      <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -84,7 +85,5 @@
             @yield('content')
         </main>
     </div>
-    <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
-    <script src="{{ asset('js/auth/certificate.js') }}"></script>
 </body>
 </html>

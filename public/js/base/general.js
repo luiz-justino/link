@@ -1,17 +1,4 @@
 $(function() {
-    $body = $("body");
-    $loading = $(".loading-screen");
-    $("body").click(function() {
-        $(".dropdown.active").removeClass("active");
-        $(".dropdown-menu").slideUp();
-        $(".fa-plus").rotate({
-            endDeg: 0,
-            persist: true,
-            duration: 0.5,
-            easing: "ease-in"
-        });
-    });
-
     hasPermission();
 });
 

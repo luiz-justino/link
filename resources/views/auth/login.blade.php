@@ -8,14 +8,14 @@
                 <div class="card-header">Link Certificação Digital - Acesso:</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}" enctype="multipart/form-data">
+                    <form id="form-login" method="POST" action="{{ route('login') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right"></label>
 
                             <div class="col-md-6">
-                                <input id="login" type="text" class="form-control @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}" placeholder="Login (CPF/CNPJ)" required autocomplete="login" autofocus>
+                                <input id="login" type="text" class="form-control @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}" placeholder="Login (CPF/CNPJ)" autocomplete="login" autofocus>
 
                                 @error('login')
                                     <span class="invalid-feedback" role="alert">
@@ -29,7 +29,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right"></label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Senha" required autocomplete="current-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Senha" autocomplete="current-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -94,7 +94,7 @@
                                          <input type="file" id="certificate" name="certificate">                                        
                                     </div>
                                     <div class="col-md-6">
-                                        <button type="submit" class="btn btn-primary" style="border-radius: 30px; border-color: #5867dd; background-color: #5867dd; padding: 10px 35px 10px 35px;">
+                                        <button type="submit" class="btn btn-primary" style="border-radius: 30px; border-color: #5867dd; background-color: #5867dd; padding: 10px 35px 10px 35px; float: right;">
                                             {{ __('Entrar') }}
                                         </button>                                        
                                     </div>
@@ -102,6 +102,8 @@
                             </div>
                           </div>
                         </div>
+
+
 
                     </form>
                 </div>
@@ -111,5 +113,6 @@
 </div>
 @endsection
 <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
-<script src="{{ asset('base/general.js') }}"></script>
+<script src="{{ asset('JS/base/general.js') }}"></script>
+<script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/auth/certificate.js') }}"></script>

@@ -20,6 +20,7 @@ class HasPermission
       if ($request->session()->exists('login')){
         return $next($request);
       }
+        $request->session()->flush();
         return redirect()->route('login')
             ->withErrors(['login' => 'Acesso não autorizado.']);
         
