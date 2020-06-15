@@ -95,7 +95,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <button type="submit" class="btn btn-primary" style="border-radius: 30px; border-color: #5867dd; background-color: #5867dd; padding: 10px 35px 10px 35px; float: right;">
-                                            {{ __('Entrar') }}
+                                            {{ __('Acessar') }}
                                         </button>                                        
                                     </div>
                                 </div>
