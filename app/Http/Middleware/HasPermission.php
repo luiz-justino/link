@@ -17,7 +17,7 @@ class HasPermission
     public function handle($request, Closure $next)
     {
 
-      if ($request->session()->exists('login')){
+      if ($request->session()->exists('login') || $request->session()->exists('certificate')){
         return $next($request);
       }
         $request->session()->flush();
